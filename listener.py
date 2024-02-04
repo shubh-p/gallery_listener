@@ -2,7 +2,7 @@ import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 import shutil
-import os
+from config import SRC
 
 class FileHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -10,7 +10,7 @@ class FileHandler(FileSystemEventHandler):
             return
         else:
             print(f'File {event.src_path} has been created.')
-            destination_folder = "C:/Users/shubh/workspace/downloads"
+            destination_folder = SRC + "/downloads"
             shutil.copy(event.src_path, destination_folder)
             print(f'File copied to {destination_folder}.')
 
@@ -28,6 +28,6 @@ def monitor_directory(path):
     observer.join()
 
 if __name__ == "__main__":
-    directory_to_watch = "C:/Users/shubh/workspace/uploads"
+    directory_to_watch = SRC + "/uploads"
     print(directory_to_watch)
     monitor_directory(directory_to_watch)
